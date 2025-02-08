@@ -1,11 +1,46 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import MuseumLabel from "../components/MuseumLabel.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const paintings = await getCollection("paintings");
 ---
 
 <Layout>
-	<Welcome />
+	
+  <main class="overflow-auto h-screen">
+    <div class="flex gap-40 items-center h-full mx-10">
+		{
+			paintings.map((painting) => (
+			  <div>
+				<figure
+				  class={`max-w-lg min-w-[50vh] relative`}
+				  
+				>
+				<a href={`/${painting.slug}`} >
+				  <img
+					class="block h-auto rounded-lg w-[50vh] shadow-xl"
+					src={painting.data.image}
+					alt="Imagen del cuadro"
+
+					style={`view-transition-name: image-${painting.slug}`}
+
+				  />
+				</a>
+		  
+				  <MuseumLabel
+					artist={painting.data.painter}
+					date={painting.data.date}
+					title={painting.data.title}
+					season={painting.data.season}
+					episode={painting.data.episode}
+					episode_name={painting.data.episode_name}
+					episode_date={painting.data.episode_date}
+				  />
+				</figure>
+			  </div>
+			))
+		  }
+    </div>
+  </main>
 </Layout>

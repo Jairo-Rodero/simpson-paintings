@@ -1,0 +1,36 @@
+---
+interface Props {
+  artist: string;
+  date: number;
+  title: string;
+  season: number | string;
+  episode: number | string;
+  episode_name: string;
+  episode_date: number;
+}
+
+const { 
+  artist, 
+  date, 
+  title, 
+  season, 
+  episode,
+  episode_name,
+  episode_date} = Astro.props;
+---
+
+<div class="max-w-60 bg-[#f8f8f8]  font-serif text-left  shadow-xl perspective-distant 
+          absolute right-[-100px] bottom-0 transform scale-40 origin-right hover:scale-100 transition duration-500 ease-in-out
+          cursor-pointer
+          ">
+  <div class="space-y-2">
+    <div class="text-xs px-4 pt-4">
+      <span class="font-black">{artist}</span>
+      <div class="italic">{title}, {date}</div>
+    </div>
+    <div class="text-xs bg-simpson p-4 ">
+        S{season}E{episode}  '{episode_name}', {episode_date}
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,44 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+
+
+export async function getStaticPaths() {
+  const paintings = await getCollection("paintings");
+  return paintings.map((publication) => ({
+    params: { slug: publication.slug },
+    props: publication,
+  }));
+}
+
+type Props = CollectionEntry<"paintings">;
+const paintings = Astro.props;
+// export async function getStaticPaths() {
+//   const publications = await getCollection("publications");
+//   return publications.map((publication) => ({
+//     params: { slug: publication.slug },
+//     props: publication,
+//   }));
+// }
+// type Props = CollectionEntry<"publications">;
+
+// import { getImagePath } from "astro-opengraph-images";
+// const publication = Astro.props;
+// const { url, site } = Astro;
+// const openGraphImageUrl = getImagePath({ url, site });
+
+// const { Content } = await publication.render();
+---
+
+<Layout >
+  <main class="flex h-screen">
+    <img src={paintings.data.image} alt={paintings.data.title} class="h-full-screen w-auto object-contain" />
+    <div class="m-5 overflow-y-auto pr-10">
+      <h1 class="text-7xl font-black">{paintings.data.title}</h1>
+      <h2 class="text-4xl font-black">{paintings.data.painter}</h2>
+      <h3 class="text-2xl font-black">{paintings.data.date}</h3>
+
+     
+    </div>
+  </main>
+</Layout>

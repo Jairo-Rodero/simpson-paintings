@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import "tailwindcss";
+@theme {
+    --color-simpson: #fed90f;
+    --color-homer-1: #d1b271;
+    --color-homer-2: #FFFFFF;
+    --color-homer-3: #70D1FE;
+    --color-homer-4: #424F46;
+
+    --font-kanit: 'Kanit', sans-serif;   
+
+  }
+
+*{
+  font-family: var(--font-kanit);
+  scroll-behavior: smooth;
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 2px;
+  background-color: #DFE9EB;
+}
+
+*::-webkit-scrollbar-track:hover {
+  background-color: #B8C0C2;
+}
+
+*::-webkit-scrollbar-track:active {
+  background-color: #B8C0C2;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 1px;
+  background-color: var(--color-simpson);
+  border: 1px solid #FFFFFF;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-simpson);
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: var(--color-simpson);
+}
