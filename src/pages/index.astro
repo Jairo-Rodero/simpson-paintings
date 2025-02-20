@@ -4,43 +4,65 @@ import { getCollection } from "astro:content";
 import MuseumLabel from "../components/MuseumLabel.astro";
 
 const paintings = await getCollection("paintings");
+//shuffle
+paintings.sort(() => Math.random() - 0.5);
 ---
 
+<script>
+  import "@splidejs/splide/css";
+
+  import { Splide } from "@splidejs/splide";
+  import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
+
+  const splide = new Splide( '.splide', {
+  type   : 'loop',
+  drag   : 'free',
+  focus  : 'center',
+  perPage: 2,
+  arrows: false,
+
+  pagination: false,
+  autoScroll: {
+    speed: 1,
+  },
+} );
+
+splide.mount({AutoScroll});</script>
+
 <Layout>
-	
-  <main class="overflow-auto h-screen">
-    <div class="flex gap-40 items-center h-full mx-10">
-		{
-			paintings.map((painting) => (
-			  <div>
-				<figure
-				  class={`max-w-lg min-w-[50vh] relative`}
-				  
-				>
-				<a href={`/${painting.slug}`} >
-				  <img
-					class="block h-auto rounded-lg w-[50vh] shadow-xl"
-					src={painting.data.image}
-					alt="Imagen del cuadro"
-
-					style={`view-transition-name: image-${painting.slug}`}
-
-				  />
-				</a>
-		  
-				  <MuseumLabel
-					artist={painting.data.painter}
-					date={painting.data.date}
-					title={painting.data.title}
-					season={painting.data.season}
-					episode={painting.data.episode}
-					episode_name={painting.data.episode_name}
-					episode_date={painting.data.episode_date}
-				  />
-				</figure>
-			  </div>
-			))
-		  }
-    </div>
-  </main>
-</Layout>
+	<main class="h-screen relative">
+		<section class="splide absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full">
+	  
+		<div class="splide__track">
+		  <ul class="splide__list">
+			{
+			  paintings.map((painting) => (
+				<li class="splide__slide flex justify-center items-center">
+				  <figure class="max-w-lg min-w-[50vh] relative">
+					<a href={`/${painting.slug}`}>
+					  <img
+						class="block h-auto rounded-lg w-[50vh] shadow-xl"
+						src={painting.data.image}
+						alt="Imagen del cuadro"
+						style={`view-transition-name: image-${painting.slug}`}
+					  />
+					</a>
+					<MuseumLabel
+					  artist={painting.data.painter}
+					  date={painting.data.date}
+					  title={painting.data.title}
+					  season={painting.data.season}
+					  episode={painting.data.episode}
+					  episode_name={painting.data.episode_name}
+					  episode_date={painting.data.episode_date}
+					/>
+				  </figure>
+				</li>
+			  ))
+			}
+		  </ul>
+		</div>
+	  </section>
+	</main>
+  </Layout>
+  

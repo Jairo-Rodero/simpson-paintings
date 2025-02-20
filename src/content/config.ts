@@ -17,6 +17,7 @@ const paintings = defineCollection({
         episode: z.number().or(z.string()).transform(padNumber),
         episode_name: z.string(),
         episode_date: z.number(),
+        colors: z.array(z.string()).default([]).optional()
     }),
 });
 

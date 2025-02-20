@@ -13,32 +13,35 @@ export async function getStaticPaths() {
 
 type Props = CollectionEntry<"paintings">;
 const paintings = Astro.props;
-// export async function getStaticPaths() {
-//   const publications = await getCollection("publications");
-//   return publications.map((publication) => ({
-//     params: { slug: publication.slug },
-//     props: publication,
-//   }));
-// }
-// type Props = CollectionEntry<"publications">;
 
-// import { getImagePath } from "astro-opengraph-images";
-// const publication = Astro.props;
-// const { url, site } = Astro;
-// const openGraphImageUrl = getImagePath({ url, site });
-
-// const { Content } = await publication.render();
+//assign color paintigs.data.colors[0] to class jr-color
+// document.documentElement.style.setProperty('--color1-slug', paintings.data.colors[0]);
+// document.documentElement.style.setProperty('--color2-slug', paintings.data.colors[1]);
+// document.documentElement.style.setProperty('--color3-slug', paintings.data.colors[2]);
 ---
 
 <Layout >
-  <main class="flex h-screen">
-    <img src={paintings.data.image} alt={paintings.data.title} class="h-full-screen w-auto object-contain" />
+  <main class="flex h-screen"   
+  style={`
+    --color1-slug: ${paintings?.data?.colors?.[0] ?? ''}
+    --color2-slug: ${paintings?.data?.colors?.[1] ?? ''}
+    --color3-slug: ${paintings?.data?.colors?.[2] ?? ''}
+  `}  
+  >
+    <img src={paintings.data.image} alt={paintings.data.title} class="h-full-screen w-auto object-contain" 
+    style={`view-transition-name: image-${paintings.slug}`}
+    />
     <div class="m-5 overflow-y-auto pr-10">
-      <h1 class="text-7xl font-black">{paintings.data.title}</h1>
-      <h2 class="text-4xl font-black">{paintings.data.painter}</h2>
+      <h1 class="text-7xl font-black jr-color" style={`color:var(--color1-slug);`}>{paintings.data.title}</h1>
+      <h2 class="text-4xl font-black" style={`color: var(--color2-slug);`}>{paintings.data.painter}</h2>
       <h3 class="text-2xl font-black">{paintings.data.date}</h3>
+      <hr>
+      <h1 class="text-5xl font-black">S{paintings.data.season}E{paintings.data.episode} "{paintings.data.episode_name}"</h2>
+      <h3 class="text-2xl font-black">{paintings.data.episode_date}</h3>
+      <hr>
+      <p class="text-2xl">{paintings.data.colors}</p>
 
-     
     </div>
   </main>
 </Layout>
+
