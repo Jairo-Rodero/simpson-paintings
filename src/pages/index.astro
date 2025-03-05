@@ -38,10 +38,10 @@ splide.mount({AutoScroll});</script>
 			  paintings.map((painting) => (
 				<li class="splide__slide flex justify-center items-center">
 				  <figure class="max-w-lg min-w-[50vh] relative">
-					<a href={`/${painting.slug}`}>
+					<a href={`${import.meta.env.BASE_URL}/${painting.slug}`}>
 					  <img
 						class="block h-auto rounded-lg w-[50vh] shadow-xl"
-						src={painting.data.image}
+						src={`${import.meta.env.BASE_URL}/${painting.data.image}`}
 						alt="Imagen del cuadro"
 						style={`view-transition-name: image-${painting.slug}`}
 					  />
