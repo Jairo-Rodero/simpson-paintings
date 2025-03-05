@@ -9,7 +9,5 @@ export default defineConfig({
     vite: {
         plugins: [tailwindcss()]
     },
-    site: 'https://jairo-rodero.github.io/',
-    base: '/simpson-paintings/',
     integrations: [mdx()], //para usar mdx
 });
