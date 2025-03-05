@@ -28,7 +28,7 @@ const paintings = Astro.props;
     --color3-slug: ${paintings?.data?.colors?.[2] ?? ''}
   `}  
   >
-    <img src={paintings.data.image} alt={paintings.data.title} class="h-full-screen w-auto object-contain" 
+    <img src={`${import.meta.env.BASE_URL}/${paintings.data.image}`} alt={paintings.data.title} class="h-full-screen w-auto object-contain" 
     style={`view-transition-name: image-${paintings.slug}`}
     />
     <div class="m-5 overflow-y-auto pr-10">
