@@ -10,4 +10,5 @@ export default defineConfig({
         plugins: [tailwindcss()]
     },
     integrations: [mdx()], //para usar mdx
+    base: '/simpson-paintings', // Añade esta línea
 });
